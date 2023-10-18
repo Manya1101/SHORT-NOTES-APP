@@ -7,7 +7,7 @@ require("dotenv").config();
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(notesRouter);
+app.use("/notes",notesRouter);
 
 mongoose
   .connect(process.env.DB)

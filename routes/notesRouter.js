@@ -2,7 +2,7 @@ const express = require("express");
 const { Note } = require("/noteStruct");
 const notesRouter= express.Router();
 
-notesRouter.post("/notes", auth, async (req, res) => {
+notesRouter.post("/", auth, async (req, res) => {
   try {
     const { id ,title, content } = req.body;
       let newNote = new Note({
@@ -18,7 +18,7 @@ notesRouter.post("/notes", auth, async (req, res) => {
   }
 });
 
-notesRouter.get("/notes/:id", auth, async (req, res) => {
+notesRouter.get("/:id", auth, async (req, res) => {
   try {
     const { id } = req.params;
     const notes = await Note.find({ id });
@@ -28,7 +28,7 @@ notesRouter.get("/notes/:id", auth, async (req, res) => {
   }
 });
 
-notesRouter.put("/notes", auth, async (req, res) => {
+notesRouter.put("/", auth, async (req, res) => {
   try {
     const { id,title, content } = req.body;
     await Note.deleteOne({ id: id });
@@ -45,7 +45,7 @@ notesRouter.put("/notes", auth, async (req, res) => {
   }
 });
 
-notesRouter.delete("/notes", auth, async (req, res) => {
+notesRouter.delete("/", auth, async (req, res) => {
   try {
     const { id } = req.body;
     await Note.deleteOne({ id: id });
