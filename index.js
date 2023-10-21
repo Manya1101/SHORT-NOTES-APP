@@ -1,13 +1,13 @@
 const express = require('express');
-const bodyParser = require('body-parser'); 
 const mongoose =  require("mongoose");
-const notesRouter = require("./routes/notesRoute");
+const notesRouter = require("./router/notesRouter");
 require("dotenv").config();
+const app = express();
+const port = process.env.port||3000
 
-app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use("/notes",notesRouter);
+app.use("/notes", notesRouter);
 
 mongoose
   .connect(process.env.DB)
@@ -17,8 +17,6 @@ mongoose
   })
   .catch((e) => 
   {
+
     console.log(e);
-  });
-
-app.listen( process.env.port, () => {console.log(`Server Started at port ${port}`);});
-
+  });app.listen( process.env.port, () => {console.log(`Server Started at port ${port}`);});
